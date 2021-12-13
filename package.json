@@ -1,0 +1,30 @@
+{
+  "name": "@stroll/cli",
+  "version": "0.0.1",
+  "bin": {
+    "stroll": "lib/cli.js",
+    "dev": "src/index.js"
+  },
+  "dependencies": {
+    "chalk": "^5.0.0",
+    "clui": "^0.3.6",
+    "commander": "^8.3.0",
+    "figlet": "^1.5.2",
+    "gulp": "^4.0.2",
+    "gulp-stylus": "^2.7.0",
+    "inquire": "^0.4.8",
+    "meow": "^3.7.0",
+    "osenv": "^0.1.5",
+    "shelljs": "^0.8.4"
+  },
+  "devDependencies": {
+    "eslint": "^8.4.1",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3",
+    "lec": "^1.0.1"
+  },
+  "scripts": {
+    "mjs": "node --experimental-modules es6_const_let_node_exp_demo.mjs",
+    "lec": "lec -d -r src -c LF"
+  }
+}
