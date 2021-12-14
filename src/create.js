@@ -10,7 +10,7 @@ const { waitLoadingStart, ncp } = require('./constants');
 const { getRepoList, getTagList, download } = require('./http');
 
 module.exports = async function (projectName) {
-  const repos = await waitLoadingStart(getRepoList, '拉取模板列表 ...');
+  const repos = await waitLoadingStart(getRepoList, '拉取模板列表');
   if (!repos) return;
   const { repo } = await inquirer.prompt({
     name: 'repo',
@@ -19,7 +19,7 @@ module.exports = async function (projectName) {
     choices: repos,
   });
 
-  const tags = await waitLoadingStart(getTagList, '拉取版本列表 ...', repo);
+  const tags = await waitLoadingStart(getTagList, '拉取版本列表', repo);
   if (!tags) return;
   const { tag } = await inquirer.prompt({
     name: 'tag',
@@ -28,7 +28,7 @@ module.exports = async function (projectName) {
     choices: tags,
   });
 
-  const result = await waitLoadingStart(download, '拉取模板 ...', repo, tag);
+  const result = await waitLoadingStart(download, '拉取模板', repo, tag);
   if (!result) return;
   if (fs.existsSync(path.join(result, 'ask.js'))) {
     await new Promise((res, rej) => {

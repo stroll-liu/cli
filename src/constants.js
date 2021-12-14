@@ -62,7 +62,7 @@ function config() {
 }
 
 const waitLoadingStart = async (fn, mgs, ...args) => {
-  const spinner = ora(mgs || '加载中 ...');
+  const spinner = ora(`${mgs} ...` || '加载中 ...');
   spinner.start();
   const data = await fn(...args)
     .then((res) => {
@@ -70,7 +70,7 @@ const waitLoadingStart = async (fn, mgs, ...args) => {
       return res;
     })
     .catch((err) => {
-      spinner.fail(`加载失败： ${err || ''}`);
+      spinner.fail(`${mgs}失败： ${err || ''}`);
       return false;
     });
   return data;
