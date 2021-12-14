@@ -12,17 +12,7 @@
 // const consolidate = require('consolidate'); // 统一所有的模板引擎
 // const ejs = require('ejs'); // 模板引擎
 const commander = require('commander'); // 解析用户传参
-const { mapActions } = require('./constants');
-
-const mapActionsKeys = Object.keys(mapActions);
-
-function config() {
-  mapActionsKeys.forEach((key) => {
-    mapActions[key].example.forEach((example) => {
-      console.log(example);
-    });
-  });
-}
+const { mapActions, mapActionsKeys, config } = require('./constants');
 
 mapActionsKeys.forEach((key) => {
   commander

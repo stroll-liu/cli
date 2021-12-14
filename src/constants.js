@@ -51,6 +51,16 @@ const mapActions = {
   },
 };
 
+const mapActionsKeys = Object.keys(mapActions);
+
+function config() {
+  mapActionsKeys.forEach((key) => {
+    mapActions[key].example.forEach((example) => {
+      console.log(example);
+    });
+  });
+}
+
 const waitLoadingStart = async (fn, mgs, ...args) => {
   const spinner = ora(mgs || '加载中 ...');
   spinner.start();
@@ -70,6 +80,8 @@ module.exports = {
   version,
   downloadDirectory,
   mapActions,
+  mapActionsKeys,
+  config,
   waitLoadingStart,
   downloadGitRepo,
   ncp,
