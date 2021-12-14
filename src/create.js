@@ -1,5 +1,5 @@
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
 const inquirer = require('inquirer'); // 与用户交互
 const metalsmith = require('metalsmith'); // 便利文件夹 查看需不需要渲染
 const { render } = require('consolidate').ejs; // 统一所有的模板引擎
