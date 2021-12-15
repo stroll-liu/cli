@@ -1,0 +1,11 @@
+.red {
+  color: $a
+}
+distance = 4 6 8 10 12 14 16 20 30
+direction = t top, r right, b bottom, l left
+for num in distance
+  for dir in direction
+    .m{dir[0]}{num}
+      margin-{dir[1]}: 1px * num
+    .p{dir[0]}{num}
+      padding-{dir[1]}: 1px * num

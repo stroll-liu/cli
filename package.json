@@ -36,7 +36,8 @@
   "scripts": {
     "mjs": "node --experimental-modules es6_const_let_node_exp_demo.mjs",
     "gulp": "npx gulp",
-    "tasks": "npx gulp --tasks",
+    "gulpJs": "npx gulp js",
+    "gulpCss": "npx gulp css",
     "lec": "lec -d -r src -c LF"
   },
   "description": "",
