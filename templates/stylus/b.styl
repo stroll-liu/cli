@@ -1,6 +1,9 @@
+@import './common/variable';
+
 distance2 = 100 200 300 400
 direction2 = w 'width', h 'height', maxW 'max-width', maxH 'max-height', minW 'min-width', minH 'min-height'
 for num in distance2
   for dir in direction2
     .{dir[0]}{num}
       {dir[1]}: 1px * num !important
+      color: $color

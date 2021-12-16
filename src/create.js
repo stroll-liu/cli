@@ -4,7 +4,7 @@ const inquirer = require('inquirer'); // 与用户交互
 const metalsmith = require('metalsmith'); // 便利文件夹 查看需不需要渲染
 const { render } = require('consolidate').ejs; // 统一所有的模板引擎
 // const ejs = require('ejs'); // 模板引擎
-const shelljs = require('shelljs'); // Node.js执行shell命令
+// const shelljs = require('shelljs'); // Node.js执行shell命令
 
 const { waitLoadingStart, ncp } = require('./constants');
 const { getRepoList, getTagList, download } = require('./http');

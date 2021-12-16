@@ -18,20 +18,18 @@
     "ora": "^3.4.0",
     "osenv": "^0.1.5",
     "shelljs": "^0.8.4",
-    "util": "^0.12.4"
+    "util": "^0.12.4",
+    "gulp": "^4.0.2",
+    "gulp-changed": "^4.0.3",
+    "gulp-clean": "^0.4.0",
+    "gulp-stylus": "^2.7.0",
+    "gulp-uglify": "^3.0.2"
   },
   "devDependencies": {
     "eslint": "^8.4.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.3",
-    "gulp": "^4.0.2",
-    "gulp-changed": "^4.0.3",
-    "gulp-clean": "^0.4.0",
-    "gulp-stylus": "^2.7.0",
-    "gulp-uglify": "^3.0.2",
-    "lec": "^1.0.1",
-    "pump": "^3.0.0",
-    "run-sequence": "^2.2.1"
+    "lec": "^1.0.1"
   },
   "scripts": {
     "mjs": "node --experimental-modules es6_const_let_node_exp_demo.mjs",

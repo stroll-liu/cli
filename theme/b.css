@@ -1,72 +1,96 @@
 .w100 {
   width: 100px !important;
+  color: #f00;
 }
 .h100 {
   height: 100px !important;
+  color: #f00;
 }
 .maxW100 {
   max-width: 100px !important;
+  color: #f00;
 }
 .maxH100 {
   max-height: 100px !important;
+  color: #f00;
 }
 .minW100 {
   min-width: 100px !important;
+  color: #f00;
 }
 .minH100 {
   min-height: 100px !important;
+  color: #f00;
 }
 .w200 {
   width: 200px !important;
+  color: #f00;
 }
 .h200 {
   height: 200px !important;
+  color: #f00;
 }
 .maxW200 {
   max-width: 200px !important;
+  color: #f00;
 }
 .maxH200 {
   max-height: 200px !important;
+  color: #f00;
 }
 .minW200 {
   min-width: 200px !important;
+  color: #f00;
 }
 .minH200 {
   min-height: 200px !important;
+  color: #f00;
 }
 .w300 {
   width: 300px !important;
+  color: #f00;
 }
 .h300 {
   height: 300px !important;
+  color: #f00;
 }
 .maxW300 {
   max-width: 300px !important;
+  color: #f00;
 }
 .maxH300 {
   max-height: 300px !important;
+  color: #f00;
 }
 .minW300 {
   min-width: 300px !important;
+  color: #f00;
 }
 .minH300 {
   min-height: 300px !important;
+  color: #f00;
 }
 .w400 {
   width: 400px !important;
+  color: #f00;
 }
 .h400 {
   height: 400px !important;
+  color: #f00;
 }
 .maxW400 {
   max-width: 400px !important;
+  color: #f00;
 }
 .maxH400 {
   max-height: 400px !important;
+  color: #f00;
 }
 .minW400 {
   min-width: 400px !important;
+  color: #f00;
 }
 .minH400 {
   min-height: 400px !important;
+  color: #f00;
 }
