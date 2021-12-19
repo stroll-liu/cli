@@ -6,8 +6,8 @@ const { render } = require('consolidate').ejs; // 统一所有的模板引擎
 // const ejs = require('ejs'); // 模板引擎
 // const shelljs = require('shelljs'); // Node.js执行shell命令
 
-const { waitLoadingStart, ncp } = require('./constants');
-const { getRepoList, getTagList, download } = require('./http');
+const { waitLoadingStart, ncp } = require('../constants');
+const { getRepoList, getTagList, download } = require('../http');
 
 module.exports = async function (projectName) {
   const repos = await waitLoadingStart(getRepoList, '拉取模板列表');
