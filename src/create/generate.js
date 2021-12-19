@@ -1,35 +1,12 @@
 const fs = require('fs');
 const path = require('path');
-const inquirer = require('inquirer'); // 与用户交互
+const inquirer = require('inquirer');
 const metalsmith = require('metalsmith'); // 便利文件夹 查看需不需要渲染
 const { render } = require('consolidate').ejs; // 统一所有的模板引擎
-// const ejs = require('ejs'); // 模板引擎
-// const shelljs = require('shelljs'); // Node.js执行shell命令
 
-const { waitLoadingStart, ncp } = require('../constants');
-const { getRepoList, getTagList, download } = require('../http');
+const { waitLoadingStart, ncp } = require('../config/method');
 
-module.exports = async function (projectName) {
-  const repos = await waitLoadingStart(getRepoList, '拉取模板列表');
-  if (!repos) return;
-  const { repo } = await inquirer.prompt({
-    name: 'repo',
-    type: 'list',
-    message: '选择创建的项目(Select the created project)',
-    choices: repos,
-  });
-
-  const tags = await waitLoadingStart(getTagList, '拉取版本列表', repo);
-  if (!tags) return;
-  const { tag } = await inquirer.prompt({
-    name: 'tag',
-    type: 'list',
-    message: '选择项目版本(Select project version)',
-    choices: tags,
-  });
-
-  const result = await waitLoadingStart(download, '拉取模板', repo, tag);
-  if (!result) return;
+module.exports = async function (projectName, result) {
   if (fs.existsSync(path.join(result, 'ask.js'))) {
     await new Promise((res, rej) => {
       metalsmith(__dirname)
