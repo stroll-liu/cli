@@ -30,6 +30,8 @@ program
   .description('Create project (创建工程)')
   .option('-t, --type <projectType>', 'project type: main | minor (工程类型: 主要 | 次要)')
   .option('-l, --local', 'Pull locally cached templates (拉取本地缓存模板)')
+  .option('-m, --local', 'Pull locally cached templates (拉取本地缓存模板)')
+  .option('-f, --force', 'Pull locally cached templates (拉取本地缓存模板)')
   .action((projectName, envs, cmdObj) => {
     Create(projectName, envs, cmdObj);
   });

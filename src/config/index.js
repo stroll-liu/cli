@@ -7,5 +7,6 @@ module.exports = {
       val: 'minor-items',
     },
   },
+  stdout: [],
   downloadDirectory: `${process.env[process.platform === 'darwin' ? 'HOME' : 'USERPROFILE']}/.template`,
 };

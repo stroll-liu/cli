@@ -13,7 +13,6 @@ module.exports = async function (projectName, envs, cmdObj) {
     choices: types,
   });
 
-  // eslint-disable-next-line no-param-reassign
   cmdObj.type = type;
   if (local) {
     await Local(projectName, envs, cmdObj);
