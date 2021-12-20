@@ -1,7 +1,7 @@
 const fs = require('fs');
 const clean = require('gulp-clean');
-const uglify = require('gulp-uglify');
-const changed = require('gulp-changed');
+const babel = require('gulp-babel');
+const gulpObfuscator = require('gulp-javascript-obfuscator');
 const stylus = require('gulp-stylus');
 const {
   task, src, series, dest,
@@ -67,10 +67,11 @@ task(
   series(
     'cleanJs',
     () => src('src/**/*.js') // 获取原目录下所有的js文件
-      .pipe(changed('dist', { extension: '.js' })) // 每次打包时，只打包内容发生改变的文件
-      .pipe(uglify({
-        mangle: false,
-        compress: true,
+      .pipe(babel({
+        presets: ['@babel/preset-env'],
+      }))
+      .pipe(gulpObfuscator({
+        compact: true,
       })) // 执行JS压缩
       .pipe(dest('dist')), // 输出至目标目录
   ),
