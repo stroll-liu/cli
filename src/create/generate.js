@@ -1,6 +1,7 @@
 /* eslint-disable global-require */
-const fs = require('fs');
+const { existsSync, rmSync } = require('fs');
 const path = require('path');
+const chalk = require('chalk');
 const inquirer = require('inquirer');
 const metalsmith = require('metalsmith'); // 便利文件夹 查看需不需要渲染
 const { render } = require('consolidate').ejs; // 统一所有的模板引擎
@@ -8,9 +9,40 @@ const { render } = require('consolidate').ejs; // 统一所有的模板引擎
 const { waitLoadingStart, ncp } = require('../config/method');
 
 module.exports = async function (result, cmdObj) {
-  const { current, packageName } = cmdObj;
-  const destination = current ? process.cwd() : path.resolve(packageName);
-  if (fs.existsSync(path.join(result, 'ask.js'))) {
+  const {
+    destination, force, current,
+  } = cmdObj;
+  if (!force) {
+    if (current) {
+      const { isForce } = await inquirer.prompt({
+        name: 'file',
+        type: 'list',
+        message: 'Whether to overwrite the directory (是否覆盖目录)',
+        choices: [{ name: 'yes (是)', value: true }, { name: 'no (否)', value: false }],
+      });
+      if (isForce) {
+        await rmSync(destination, { recursive: true });
+      }
+    } else if (existsSync(destination)) {
+      const { action } = await inquirer.prompt([
+        {
+          name: 'action',
+          type: 'list',
+          message: `Target directory ${chalk.cyan(destination)} already exists (目标目录 ${chalk.cyan(destination)} 已存在).`,
+          choices: [
+            { name: 'Overwrite (覆盖)', value: 'overwrite' },
+            { name: 'Merge (不做处理)', value: 'merge' },
+            { name: 'Cancel (取消)', value: false },
+          ],
+        },
+      ]);
+      if (!action) return;
+      if (action === 'overwrite') await rmSync(destination, { recursive: true });
+    }
+  } else {
+    await rmSync(destination, { recursive: true });
+  }
+  if (existsSync(path.join(result, 'ask.js'))) {
     await new Promise((res, rej) => {
       metalsmith(__dirname)
         .source(result)

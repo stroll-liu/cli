@@ -1,9 +1,9 @@
+const leven = require('leven');
 const ora = require('ora'); // 加载效果
 const chalk = require('chalk');
 let downloadGitRepo = require('download-git-repo'); // 下载git项目
 const { exec } = require('child_process');
 const { promisify } = require('util'); // 把异步任务转为同步任务 promise
-const leven = require('leven');
 
 const { exit } = process;
 let ncp = require('ncp'); // 异步递归文件和目录复制
@@ -35,7 +35,6 @@ const nodeShell = async (shellArr) => {
     const { shell, options, fn } = item;
     // const message = shell.split(' ').length - 1;
     // const spinner = ora(`${message || '拉取中'} ...`);
-    console.log(shell);
     exec(shell, options || {}, (e, out, err) => {
       if (err) {
         // spinner.fail(chalk.err(`${message}拉取失败： ${e || ''}`));
@@ -43,7 +42,6 @@ const nodeShell = async (shellArr) => {
       }
       stdout.push(out);
       stderr.push(err);
-      console.log(stdout, stderr);
       // spinner.succeed();
       if (fn) fn(err, out, err);
     });

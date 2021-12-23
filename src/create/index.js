@@ -10,19 +10,22 @@ const Type = require('./type');
 const { exit } = process;
 const { error, warning } = console;
 
-module.exports = async function (projectName, envs, cmdObj) {
-  cmdObj.current = projectName === '.';
-  const result = validateProjectName(projectName);
+module.exports = async function (name, envs, cmdObj) {
+  cmdObj.current = name === '.';
+  const result = validateProjectName(name);
   if (cmdObj.current) {
     cmdObj.packageName = path.basename(path.resolve());
   } else {
-    cmdObj.packageName = projectName;
+    cmdObj.packageName = name;
   }
   if (!result.validForNewPackages && !cmdObj.current) {
-    error(chalk.red(`Invalid project name: "${projectName}"`));
+    error(chalk.red(`Invalid project name: "${name}"`));
     await exit(1);
   }
-  const { type, local } = cmdObj;
+  const {
+    type, local, current,
+  } = cmdObj;
+  cmdObj.destination = current ? process.cwd() : path.resolve(name);
   if (type && ['main', 'minor'].includes(type)) {
     if (local) {
       Local(envs, cmdObj);
