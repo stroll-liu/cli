@@ -22,6 +22,8 @@ const Inspect = require('./inspect');
 const { E2E, Unit } = require('./test');
 const Lint = require('./lint');
 
+const { suggestCommands } = require('./config/method');
+
 program.version(version);
 
 program
@@ -30,8 +32,18 @@ program
   .description('Create project (创建工程)')
   .option('-t, --type <projectType>', 'project type: main | minor (工程类型: 主要 | 次要)')
   .option('-l, --local', 'Pull locally cached templates (拉取本地缓存模板)')
-  .option('-m, --local', 'Pull locally cached templates (拉取本地缓存模板)')
-  .option('-f, --force', 'Pull locally cached templates (拉取本地缓存模板)')
+  .option('-m, --merge', 'Merge template (合并模板)')
+  .option('-n, --packageManager <command>', 'Use the specified npm client when installing dependencies (在安装依赖时使用指定的 npm 客户端)')
+  .option('-r, --registry <url>', 'Use the specified npm registry when installing dependencies (在安装依赖时使用指定的 npm 客户端)')
+  .option('-g, --git [message]', 'Mandatory / skip git initialization, and optionally specify the initialization submission information (强制 / 跳过 git 初始化，并可选的指定初始化提交信息)')
+  .option('-n, --no-git', 'Skip git initialization (跳过 git 初始化)')
+  .option('-f, --force', 'Overwrite the possible configuration of the target directory (覆写目标目录可能存在的配置)')
+  .option('-c, --clone', 'Use git clone to get remote preset options (使用 git clone 获取远程预设选项)')
+  .option('-x, --proxy', 'Create a project using the specified agent (使用指定的代理创建项目)')
+  .option('-b, --bare', 'Omit the novice guidance information in the default components when creating the project (创建项目时省略默认组件中的新手指导信息)')
+  .option('-p, --preset <presetName> ', 'Ignore the prompt and use the saved or remote preset options (忽略提示符并使用已保存的或远程的预设选项)')
+  .option('-d, --default', 'Ignore the prompt and use the default preset options (忽略提示符并使用默认预设选项)')
+  .option('-i, --inlinePreset <json>', 'Ignore the prompt and use the inline JSON string preset options (忽略提示符并使用内联的 JSON 字符串预设选项)')
   .action((projectName, envs, cmdObj) => {
     Create(projectName, envs, cmdObj);
   });
@@ -95,6 +107,11 @@ program
   .description('Run unit tests with mochapack (使用 mochapack 运行单元测试)')
   .action((fileName, envs, cmdObj) => {
     Unit(fileName, envs, cmdObj);
+  });
+
+program.arguments('<command>')
+  .action((cmd) => {
+    suggestCommands(cmd, program.commands);
   });
 
 // 自定义监听命令

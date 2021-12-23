@@ -8,7 +8,7 @@ const {
   getRepoList, getTagList, download,
 } = require('../http');
 
-module.exports = async function (projectName, envs, cmdObj) {
+module.exports = async function (envs, cmdObj) {
   const { type } = cmdObj;
   const org = orgs[type].val;
   const repos = await waitLoadingStart(getRepoList, '拉取模板列表', org);
@@ -36,10 +36,16 @@ module.exports = async function (projectName, envs, cmdObj) {
     choices: tags,
   });
 
-  const result = await waitLoadingStart(download, '拉取模板', org, repo, tag);
+  const result = await waitLoadingStart(
+    download,
+    '拉取模板',
+    org,
+    repo,
+    tag,
+  );
   if (!result) {
     chalk.yellow('未拉取到拉取模板');
     return;
   }
-  await generate(projectName, result);
+  await generate(result, cmdObj);
 };

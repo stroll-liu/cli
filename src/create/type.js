@@ -4,7 +4,7 @@ const Local = require('./local');
 const Remote = require('./remote');
 const { orgs } = require('../config');
 
-module.exports = async function (projectName, envs, cmdObj) {
+module.exports = async function (envs, cmdObj) {
   const types = Object.keys(orgs);
   const { type, local } = await inquirer.prompt({
     name: 'type',
@@ -15,8 +15,8 @@ module.exports = async function (projectName, envs, cmdObj) {
 
   cmdObj.type = type;
   if (local) {
-    await Local(projectName, envs, cmdObj);
+    await Local(envs, cmdObj);
   } else {
-    await Remote(projectName, envs, cmdObj);
+    await Remote(envs, cmdObj);
   }
 };

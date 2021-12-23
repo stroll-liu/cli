@@ -5,12 +5,11 @@ const inquirer = require('inquirer');
 const generate = require('./generate');
 const { downloadDirectory } = require('../config');
 
-module.exports = async function (projectName) {
+module.exports = async function (envs, cmdObj) {
   fs.readdir(downloadDirectory, async (err, files) => {
     if (err) {
       return console.log(chalk.yellow('The local template does not exist (本地模板不存在)'));
     }
-    console.log(files);
     const { file } = await inquirer.prompt({
       name: 'file',
       type: 'list',
@@ -18,6 +17,6 @@ module.exports = async function (projectName) {
       choices: files,
     });
     const fileAddress = `${downloadDirectory}/${file}`;
-    return generate(projectName, fileAddress);
+    return generate(fileAddress, cmdObj);
   });
 };

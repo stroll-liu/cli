@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 const fs = require('fs');
 const path = require('path');
 const inquirer = require('inquirer');
@@ -6,13 +7,16 @@ const { render } = require('consolidate').ejs; // 统一所有的模板引擎
 
 const { waitLoadingStart, ncp } = require('../config/method');
 
-module.exports = async function (projectName, result) {
+module.exports = async function (result, cmdObj) {
+  const { current, packageName } = cmdObj;
+  const destination = current ? process.cwd() : path.resolve(packageName);
   if (fs.existsSync(path.join(result, 'ask.js'))) {
     await new Promise((res, rej) => {
       metalsmith(__dirname)
         .source(result)
-        .destination(path.resolve(projectName || 'abc'))
+        .destination(destination)
         .use(async (files, metal, done) => {
+          // eslint-disable-next-line import/no-dynamic-require
           const args = require(path.join(result, 'ask.js'));
           const obj = await inquirer.prompt(args);
           const meta = metal.metadata();
@@ -44,6 +48,11 @@ module.exports = async function (projectName, result) {
         });
     });
   } else {
-    await waitLoadingStart(ncp, '创建模板 ...', result, path.resolve(projectName || 'abc'));
+    await waitLoadingStart(
+      ncp,
+      '创建模板 ...',
+      result,
+      destination,
+    );
   }
 };

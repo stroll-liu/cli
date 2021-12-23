@@ -3,6 +3,7 @@ const chalk = require('chalk');
 let downloadGitRepo = require('download-git-repo'); // 下载git项目
 const { exec } = require('child_process');
 const { promisify } = require('util'); // 把异步任务转为同步任务 promise
+const leven = require('leven');
 
 const { exit } = process;
 let ncp = require('ncp'); // 异步递归文件和目录复制
@@ -21,7 +22,8 @@ const waitLoadingStart = async (fn, mgs, ...args) => {
       return res;
     })
     .catch((err) => {
-      spinner.fail(chalk.err(`${mgs}失败： ${err || ''}`));
+      spinner.fail(chalk.red(`${mgs}失败： ${err || ''}`));
+      exit(1);
       return false;
     });
   return data;
@@ -58,9 +60,28 @@ const nodeShell = async (shellArr) => {
   }
 };
 
+function suggestCommands(unknownCommand, commands) {
+  // eslint-disable-next-line no-underscore-dangle
+  const availableCommands = commands.map((cmd) => cmd._name);
+
+  let suggestion;
+
+  availableCommands.forEach((cmd) => {
+    const isBestMatch = leven(cmd, unknownCommand) < leven(suggestion || '', unknownCommand);
+    if (leven(cmd, unknownCommand) < 3 && isBestMatch) {
+      suggestion = cmd;
+    }
+  });
+
+  if (suggestion) {
+    console.log(`${chalk.red(`Did you mean ${chalk.yellow(suggestion)}`)}?`);
+  }
+}
+
 module.exports = {
   waitLoadingStart,
   downloadGitRepo,
+  suggestCommands,
   ncp,
   exec,
   nodeShell,
