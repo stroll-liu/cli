@@ -76,10 +76,24 @@ function suggestCommands(unknownCommand, commands) {
   }
 }
 
+const getPromptModules = () => [
+  'vueVersion',
+  'babel',
+  'typescript',
+  'pwa',
+  'router',
+  'vuex',
+  'cssPreprocessors',
+  'linter',
+  'unit',
+  'e2e',
+].map((file) => require(`../promptModules/${file}`));
+
 module.exports = {
   waitLoadingStart,
   downloadGitRepo,
   suggestCommands,
+  getPromptModules,
   ncp,
   exec,
   nodeShell,
