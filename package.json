@@ -2,7 +2,7 @@
   "name": "@stroll/cli",
   "version": "0.0.1",
   "bin": {
-    "stroll": "src/index.js"
+    "stroll": "dist/index.js"
   },
   "dependencies": {
     "@babel/core": "^7.16.5",
