@@ -2,7 +2,7 @@
   "name": "@stroll/cli",
   "version": "0.0.1",
   "bin": {
-    "stroll": "dist/index.js"
+    "stroll": "src/index.js"
   },
   "dependencies": {
     "@babel/core": "^7.16.5",
@@ -14,12 +14,6 @@
     "download-git-repo": "^3.0.2",
     "ejs": "^3.1.6",
     "figlet": "^1.5.2",
-    "gulp": "^4.0.2",
-    "gulp-babel": "^8.0.0",
-    "gulp-clean": "^0.4.0",
-    "gulp-javascript-obfuscator": "^1.1.6",
-    "gulp-stylus": "^2.7.0",
-    "gulp-uglify": "^3.0.2",
     "inquirer": "^8.2.0",
     "leven": "^3.1.0",
     "metalsmith": "^2.3.0",
@@ -31,20 +25,25 @@
     "validate-npm-package-name": "^3.0.0"
   },
   "devDependencies": {
+    "@rollup/plugin-json": "^4.1.0",
     "eslint": "^8.4.1",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.3",
-    "lec": "^1.0.1"
+    "lec": "^1.0.1",
+    "rollup": "^2.63.0",
+    "rollup-plugin-commonjs": "^10.1.0",
+    "rollup-plugin-node-resolve": "^5.2.0",
+    "rollup-plugin-typescript": "^1.0.1",
+    "typescript": "^4.5.4"
   },
   "scripts": {
+    "package": "rollup -c",
     "mjs": "node --experimental-modules es6_const_let_node_exp_demo.mjs",
-    "gulp": "npx gulp",
-    "gulpJs": "npx gulp js",
-    "gulpCss": "npx gulp css",
     "lec": "lec -d -r src -c LF"
   },
   "description": "",
-  "main": ".eslintrc.js",
+  "main": "lib/index.cjs.js",
+  "module": "lib/index.es.js",
   "directories": {
     "lib": "lib"
   },

@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 // const program = require('commander'); // 解析用户传参
 // const inquirer = require('inquirer'); // 与用户交互
 // const figlet = require('figlet'); // LOGO生成器
