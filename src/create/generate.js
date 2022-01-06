@@ -7,6 +7,7 @@ const metalsmith = require('metalsmith'); // 便利文件夹 查看需不需要�
 const { render } = require('consolidate').ejs; // 统一所有的模板引擎
 
 const { waitLoadingStart, ncp } = require('../config/method');
+// const install = require('./install');
 
 module.exports = async function (result, cmdObj) {
   const {
@@ -58,12 +59,13 @@ module.exports = async function (result, cmdObj) {
         })
         .use(async (files, metal, done) => {
           const obj = metal.metadata();
+          console.log('modules', obj);
           await waitLoadingStart(async () => {
             Object.keys(files).forEach(async (key) => {
-              if (key.includes('.js') || key.includes('.json')) {
+              if (key.includes('.js') || key.includes('.json') || key.includes('.html') || key.includes('.ts')) {
                 let content = files[key].contents.toString();
-                if (content.includes('<%=')) {
-                  content = await render(content, obj);
+                if (content.includes('<%=') || content.includes('<%_') || content.includes('<%-')) {
+                  content = await render(content, { ...cmdObj, ...obj });
                   files[key].contents = Buffer.from(content);
                 }
               }
@@ -87,4 +89,8 @@ module.exports = async function (result, cmdObj) {
       destination,
     );
   }
+  // await install({
+  //   cwd: destination,
+  //   command: 'npm',
+  // });
 };

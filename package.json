@@ -11,6 +11,7 @@
     "chalk": "^4.0.0",
     "commander": "^8.3.0",
     "consolidate": "^0.16.0",
+    "cross-spawn": "^7.0.3",
     "download-git-repo": "^3.0.2",
     "ejs": "^3.1.6",
     "figlet": "^1.5.2",
