@@ -1,6 +1,7 @@
 node_modules
 /cypress
-/src
+/templates
+/theme
 
 *.map
 .browserslistrc
