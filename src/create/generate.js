@@ -62,7 +62,7 @@ module.exports = async function (result, cmdObj) {
           console.log('modules', obj);
           await waitLoadingStart(async () => {
             Object.keys(files).forEach(async (key) => {
-              if (key.includes('.js') || key.includes('.json') || key.includes('.html') || key.includes('.ts')) {
+              if (key.includes('.js') || key.includes('.json') || key.includes('.html') || key.includes('.ts') || key.includes('.styl')) {
                 let content = files[key].contents.toString();
                 if (content.includes('<%=') || content.includes('<%_') || content.includes('<%-')) {
                   content = await render(content, { ...cmdObj, ...obj });
