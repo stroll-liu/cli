@@ -10,17 +10,17 @@ export default {
       file: './dist/index.umd.js',
       format: 'umd',
       name: 'myLib',
-      banner: '#!/usr/bin/env node',
+      // banner: '#!/usr/bin/env node',
     },
     {
       file: './dist/index.es.js',
       format: 'es',
-      banner: '#!/usr/bin/env node',
+      // banner: '#!/usr/bin/env node',
     },
     {
       file: './dist/index.cjs.js',
       format: 'cjs',
-      banner: '#!/usr/bin/env node',
+      // banner: '#!/usr/bin/env node',
     },
   ],
   plugins: [

@@ -2,6 +2,7 @@ node_modules
 /cypress
 /templates
 /theme
+package-lock.json
 
 *.map
 .browserslistrc
